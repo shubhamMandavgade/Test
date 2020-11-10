@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="row">
+      <div class="col-4">
+        <form #personForm="ngForm" (ngSubmit)="onSubmit(personForm)">
+          <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="personService.selectedPerson._id">
+          <div class="form-group">
+            <label for="nm">Name:</label>
+            <input type="text" class="form-control" id="nm" name="name" #name="ngModel"
+              [(ngModel)]="personService.selectedPerson.name" placeholder="Enter your name" required>
+          </div>
+          <div class="form-group">
+            <label for="rol">Age:</label>
+            <input type="text" class="form-control" id="age" name="age" #age="ngModel"
+              [(ngModel)]="personService.selectedPerson.age" placeholder="Enter your age" required>
+          </div>
+          <div class="form-group">
+            <label for="loc">Gender:</label>
+            <input type="text" class="form-control" id="gender" name="gender" #gender="ngModel"
+              [(ngModel)]="personService.selectedPerson.gender" placeholder="Enter your gender">
+          </div>
+          <div class="form-group">
+            <label for="sal">Contact No:</label>
+            <input type="text" class="form-control" id="mob_no" name="mob_no" #mob_no="ngModel"
+              [(ngModel)]="personService.selectedPerson.mob_no" placeholder="Enter your contact no.">
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!personForm.valid">Submit</button>&nbsp;
+          <button type="button" class="btn btn-info" (click)="resetForm(personForm)">Reset</button>
+        </form>
+      </div>
+  
+      <div class="col-8">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Contact No</th>
+            </tr>
+          </thead>
+          <tr *ngFor="let per of personService.person">
+            <td>{{per.name}}</td>
+            <td>{{per.age}}</td>
+            <td>{{per.gender}}</td>
+            <td>{{per.mob_no}}</td>
+            <td>
+              <a class="btn" (click)="onEdit(per)">
+                <i class="fa fa-edit"></i>
+              </a>
+              <a class="btn" (click)="onDelete(per._id,personForm)">
+                <i class="fa fa-remove"></i>
+              </a>
+            </td>
+          </tr>
+        </table>
+        <hr>
+      </div>
+    </div>
+  </div>
